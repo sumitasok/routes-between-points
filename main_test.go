@@ -33,5 +33,9 @@ func TestAdd(t *testing.T) {
 		},
 	}, r)
 
+	r.Increment("a", "b", -1)
+
+	assert.Equal(2, r.Path["a"]["b"])
+
 	assert.True(true)
 }
