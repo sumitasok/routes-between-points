@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type Routes struct {
@@ -45,8 +46,30 @@ func (r *Routes) Reset() {
 }
 
 func (r *Routes) Traverse(route string) (bool, int) {
+	path := strings.Split(route, "")
+
+	for i := 0; i < len(path)-1; i++ {
+		a, b := alphabeticSort(path[i], path[i+1])
+
+		if _, oka := r.Path[a]; oka {
+			if _, okb := r.Path[a][b]; okb {
+				if r.Path[a][b] > 0 {
+					r.Path[a][b] = r.Path[a][b] - 1
+				} else {
+					r.Reset()
+					return false, 0
+				}
+			} else {
+				r.Reset()
+				return false, 0
+			}
+		} else {
+			r.Reset()
+			return false, 0
+		}
+	}
 	r.Reset()
-	return true, 0
+	return true, 1
 }
 
 func alphabeticSort(a, b string) (string, string) {
