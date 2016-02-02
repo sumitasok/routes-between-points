@@ -31,11 +31,8 @@ func TestAdd(t *testing.T) {
 				"c": 1,
 			},
 		},
+		Build: []Path{Path{A: "a", B: "b", Count: 1}, Path{A: "a", B: "b", Count: 2}, Path{A: "b", B: "c", Count: 1}},
 	}, r)
-
-	r.Increment("a", "b", -1)
-
-	assert.Equal(2, r.Path["a"]["b"])
 
 	assert.True(true)
 }
