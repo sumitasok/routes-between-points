@@ -7,13 +7,23 @@ import (
 )
 
 type Routes struct {
-	Path map[string]*Path
+	Path map[string]map[string]int
 }
 
-type Path map[string]int
-
-func (r *Routes) Add(a, b string, pathCount int) {
+func (r *Routes) Increment(a, b string, pathCount int) {
 	a, b = alphabeticSort(a, b)
+
+	if r.Path == nil {
+		r.Path = map[string]map[string]int{}
+	}
+
+	if _, ok := r.Path[a]; ok {
+		r.Path[a][b] = r.Path[a][b] + pathCount
+	} else {
+		r.Path[a] = map[string]int{
+			b: pathCount,
+		}
+	}
 }
 
 func alphabeticSort(a, b string) (string, string) {
