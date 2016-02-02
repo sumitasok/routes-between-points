@@ -68,6 +68,9 @@ func (r *Routes) Traverse(route string) (bool, int) {
 			return false, 0
 		}
 	}
+	// start := path[0]
+	// end := path[len(path)-1]
+	// fmt.Println(start, end)
 	r.Reset()
 	return true, 1
 }
@@ -84,5 +87,20 @@ func main() {
 	//Enter your code here. Read input from STDIN. Print output to STDOUT
 	reader := bufio.NewReader(os.Stdin)
 	route, _ := reader.ReadString('\n')
-	fmt.Println(route)
+	// fmt.Println(route)
+
+	r := Routes{}
+
+	r.Increment("a", "b", 1)
+	r.Increment("b", "c", 3)
+	r.Increment("c", "d", 3)
+	r.Increment("b", "d", 2)
+	r.Increment("d", "e", 1)
+
+	route = strings.Replace(route, "\n", "", -1)
+	// fmt.Println(route)
+
+	ok, count := r.Traverse(route)
+	fmt.Println(ok)
+	fmt.Println(count)
 }

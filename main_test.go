@@ -46,7 +46,7 @@ func TestAdd(t *testing.T) {
 
 	r2.Increment("a", "b", 1)
 
-	ok, count = r2.Traverse("bac")
+	ok, count = r2.Traverse("aba")
 	assert.False(ok)
 	assert.Equal(0, count)
 
